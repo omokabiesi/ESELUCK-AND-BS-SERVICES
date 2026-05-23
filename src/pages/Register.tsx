@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, User, Phone, Building, MapPin, UserPlus } from 'lucide-react';
@@ -30,8 +30,19 @@ export default function Register() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [step, setStep] = useState(1);
-  const { signUp } = useAuth();
+  const [registrationComplete, setRegistrationComplete] = useState(false);
+  const { signUp, profile, loading: authLoading, isDistributor } = useAuth();
   const navigate = useNavigate();
+
+  // Auto-redirect when profile loads after successful registration
+  useEffect(() => {
+    if (loading || authLoading) return;
+    
+    if (registrationComplete && profile && isDistributor) {
+      console.log('[REGISTER] Profile loaded after registration, redirecting to dashboard');
+      navigate('/dashboard', { replace: true });
+    }
+  }, [profile, authLoading, loading, isDistributor, registrationComplete, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -52,6 +63,7 @@ export default function Register() {
     }
 
     setLoading(true);
+    console.log('[REGISTER] Signing up:', formData.email);
 
     // Sign up the user
     const { error: signUpError } = await signUp(
@@ -61,14 +73,18 @@ export default function Register() {
     );
 
     if (signUpError) {
+      console.log('[REGISTER] Sign up failed:', signUpError.message);
       setError(signUpError.message);
       setLoading(false);
       return;
     }
 
+    console.log('[REGISTER] Sign up successful, updating profile...');
+
     // Wait for profile to be created by trigger, then add distributor details
     setTimeout(async () => {
       if (!supabase) {
+        console.log('[REGISTER] Supabase not initialized');
         setLoading(false);
         return;
       }
@@ -77,6 +93,7 @@ export default function Register() {
       const { data: { user } } = await supabase.auth.getUser();
 
       if (user) {
+        console.log('[REGISTER] Updating profile for user:', user.id);
         // Update profile with phone
         await supabase.
         from('profiles').
@@ -93,10 +110,15 @@ export default function Register() {
           city: formData.city,
           state: formData.state
         });
-      }
 
-      setLoading(false);
-      navigate('/dashboard');
+        console.log('[REGISTER] Profile updated, marking registration complete');
+        setRegistrationComplete(true);
+        // Redirect will happen in useEffect
+      } else {
+        console.log('[REGISTER] No user found after sign up');
+        setError('Registration failed. Please try again.');
+        setLoading(false);
+      }
     }, 1000);
   };
 
