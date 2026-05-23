@@ -20,7 +20,7 @@ jobs:
           version: latest
 
       - name: Link Supabase project
-        run: supabase link --project-ref vegbpvoxsxxwykegmtbz
+        run: supabase link --project-ref pkpekaszjxspqgrumbuk
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
 
@@ -44,7 +44,7 @@ jobs:
           version: latest
 
       - name: Link Supabase project
-        run: supabase link --project-ref vegbpvoxsxxwykegmtbz
+        run: supabase link --project-ref pkpekaszjxspqgrumbuk
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
 
@@ -53,7 +53,7 @@ jobs:
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
 
-  # Job 3: Build & Deploy to Hostinger via FTP
+  # Job 3: Build & Deploy to Hostinger via SSH
   deploy-hostinger:
     name: Build & Deploy to Hostinger
     runs-on: ubuntu-latest
@@ -77,14 +77,14 @@ jobs:
           VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
 
-      - name: Deploy to Hostinger via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      - name: Deploy to Hostinger via SSH (rsync)
+        uses: easingthemes/ssh-deploy@main
         with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./dist/
-          server-dir: ${{ secrets.FTP_SERVER_DIR }}
-          exclude: |
-            **/.git*
-            **/.git*/**
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "dist/"
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USERNAME }}
+          REMOTE_PORT: ${{ secrets.SSH_PORT }}
+          TARGET: /public_html/
+          EXCLUDE: "/.git/, /.github/"
