@@ -98,6 +98,12 @@ export default function Navbar() {
                     Login
                   </Link>
                   <Link
+                  to="/register"
+                  className="px-6 py-2.5 bg-forest border-2 border-gold text-gold font-semibold text-sm rounded-lg hover:bg-gold hover:text-forest transition-all">
+
+                    Register as Distributor
+                  </Link>
+                  <Link
                   to="/contact"
                   className="px-6 py-2.5 bg-gradient-to-r from-gold to-gold-light text-forest font-semibold text-sm rounded-lg hover:shadow-gold transition-all duration-300 hover:scale-105">
 
@@ -182,6 +188,12 @@ export default function Navbar() {
 
                         <LogIn size={18} />
                         Login
+                      </Link>
+                      <Link
+                    to="/register"
+                    className="block w-full px-6 py-3 bg-forest border-2 border-gold text-gold font-semibold text-center rounded-lg hover:bg-gold hover:text-forest transition-all">
+
+                        Register as Distributor
                       </Link>
                       <Link
                     to="/contact"
