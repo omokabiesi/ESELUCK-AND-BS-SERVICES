@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { motion } from 'framer-motion';
 import { Mail, Lock, Eye, EyeOff, LogIn } from 'lucide-react';
@@ -12,22 +12,40 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { signIn } = useAuth();
+  const { signIn, profile, loading: authLoading, isAdmin, isDistributor } = useAuth();
   const navigate = useNavigate();
+
+  // Auto-redirect when profile loads after successful login
+  useEffect(() => {
+    if (loading || authLoading) return;
+    
+    if (profile) {
+      console.log('[LOGIN] Profile loaded, redirecting...', { isAdmin, isDistributor });
+      if (isAdmin) {
+        console.log('[LOGIN] Redirecting admin to /dashboard');
+        navigate('/dashboard', { replace: true });
+      } else if (isDistributor) {
+        console.log('[LOGIN] Redirecting distributor to /dashboard');
+        navigate('/dashboard', { replace: true });
+      }
+    }
+  }, [profile, authLoading, loading, isAdmin, isDistributor, navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
+    console.log('[LOGIN] Attempting sign in for:', email);
 
     const { error } = await signIn(email, password);
 
     if (error) {
+      console.log('[LOGIN] Sign in failed:', error.message);
       setError(error.message);
       setLoading(false);
     } else {
-      // Redirect will happen based on role in useEffect
-      navigate('/dashboard');
+      console.log('[LOGIN] Sign in successful, waiting for profile...');
+      // Profile loading and redirect will happen in useEffect above
     }
   };
 

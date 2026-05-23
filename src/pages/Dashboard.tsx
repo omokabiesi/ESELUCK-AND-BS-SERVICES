@@ -41,8 +41,10 @@ export default function Dashboard() {
   const [loadingStats, setLoadingStats] = useState(true);
 
   useEffect(() => {
+    console.log('[DASHBOARD] Auth state:', { loading, profile: profile?.id, isAdmin, isDistributor });
     if (!loading && !profile) {
-      navigate('/login');
+      console.log('[DASHBOARD] No profile, redirecting to login');
+      navigate('/login', { replace: true });
     }
   }, [loading, profile, navigate]);
 

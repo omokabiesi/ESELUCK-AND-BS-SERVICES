@@ -49,27 +49,44 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const distributorRoutes = ['/dashboard/order', '/dashboard/my-orders', '/dashboard/settings'];
 
   useEffect(() => {
-    if (loading) return;
+    console.log('[DASHBOARD_LAYOUT] Route guard check:', { 
+      loading, 
+      profile: profile?.id, 
+      isAdmin, 
+      isDistributor, 
+      currentPath: location.pathname 
+    });
+
+    if (loading) {
+      console.log('[DASHBOARD_LAYOUT] Still loading auth...');
+      return;
+    }
 
     if (!profile) {
+      console.log('[DASHBOARD_LAYOUT] No profile, redirecting to login');
       navigate('/login', { replace: true });
       return;
     }
 
-    if (adminRoutes.includes(location.pathname) && !isAdmin) {
+    // Check if admin is trying to access distributor routes
+    if (isAdmin && distributorRoutes.includes(location.pathname)) {
+      console.log('[DASHBOARD_LAYOUT] Admin trying to access distributor route, redirecting to /dashboard');
       navigate('/dashboard', { replace: true });
       return;
     }
 
-    if (distributorRoutes.includes(location.pathname) && !isDistributor) {
+    // Check if distributor is trying to access admin routes
+    if (isDistributor && adminRoutes.includes(location.pathname)) {
+      console.log('[DASHBOARD_LAYOUT] Distributor trying to access admin route, redirecting to /dashboard');
       navigate('/dashboard', { replace: true });
       return;
     }
   }, [loading, profile, isAdmin, isDistributor, location.pathname, navigate]);
 
   const handleSignOut = async () => {
+    console.log('[DASHBOARD_LAYOUT] Signing out');
     await signOut();
-    navigate('/');
+    navigate('/', { replace: true });
   };
 
   return (

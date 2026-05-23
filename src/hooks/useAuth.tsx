@@ -29,9 +29,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
+  const [profileLoaded, setProfileLoaded] = useState(false);
 
   const fetchProfile = async (userId: string) => {
     if (!supabase) return null;
+    console.log('[AUTH] Fetching profile for user:', userId);
     const { data, error } = await supabase
       .from('profiles')
       .select('*')
@@ -39,9 +41,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       .single();
     
     if (error) {
-      console.error('Error fetching profile:', error);
+      console.error('[AUTH] Error fetching profile:', error);
       return null;
     }
+    console.log('[AUTH] Profile fetched:', data);
     return data as UserProfile;
   };
 
@@ -52,14 +55,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const loadSession = async () => {
+      console.log('[AUTH] Loading session...');
       const { data: { session } } = await supabase.auth.getSession();
+      console.log('[AUTH] Session retrieved:', session?.user?.id);
       setSession(session);
       setUser(session?.user ?? null);
       if (session?.user) {
         const profileData = await fetchProfile(session.user.id);
         setProfile(profileData);
+        setProfileLoaded(true);
       } else {
         setProfile(null);
+        setProfileLoaded(true);
       }
       setLoading(false);
     };
@@ -69,7 +76,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('[AUTH] Auth state changed:', event);
         setLoading(true);
+        setProfileLoaded(false);
         setSession(session);
         setUser(session?.user ?? null);
         if (session?.user) {
@@ -78,6 +87,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         } else {
           setProfile(null);
         }
+        setProfileLoaded(true);
         setLoading(false);
       }
     );
@@ -87,6 +97,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const signUp = async (email: string, password: string, metadata?: { full_name?: string; role?: string }) => {
     if (!supabase) return { error: new Error('Database not connected') };
+    console.log('[AUTH] Signing up:', email);
     const { error } = await supabase.auth.signUp({
       email,
       password,
@@ -94,28 +105,33 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         data: metadata
       }
     });
+    console.log('[AUTH] Sign up result:', error ? error.message : 'success');
     return { error: error as Error | null };
   };
 
   const signIn = async (email: string, password: string) => {
     if (!supabase) return { error: new Error('Database not connected') };
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    console.log('[AUTH] Signing in:', email);
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    console.log('[AUTH] Sign in result:', error ? error.message : 'success', 'user:', data.user?.id);
     return { error: error as Error | null };
   };
 
   const signOut = async () => {
     if (!supabase) return;
+    console.log('[AUTH] Signing out');
     await supabase.auth.signOut();
     setUser(null);
     setProfile(null);
     setSession(null);
+    setProfileLoaded(false);
   };
 
   const value = {
     user,
     profile,
     session,
-    loading,
+    loading: loading || !profileLoaded,
     signUp,
     signIn,
     signOut,
