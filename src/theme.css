@@ -1,0 +1,56 @@
+/**
+ * ⚠️ THEME CONFIGURATION — Tailwind v4
+ * ESELUCK & BS Nigeria Limited - Premium Corporate Theme
+ * Dark green, gold, white, charcoal palette
+ */
+@theme {
+	/* Brand Colors */
+	--color-forest: #0D2818;
+	--color-forest-light: #1A4D2E;
+	--color-forest-dark: #061510;
+	--color-gold: #C4A052;
+	--color-gold-light: #D4B76A;
+	--color-gold-dark: #A68A3C;
+	--color-charcoal: #1A1A1A;
+	--color-charcoal-light: #2D2D2D;
+	--color-slate: #4A5568;
+	--color-cream: #FAF9F6;
+	--color-white: #FFFFFF;
+
+	/* Semantic Colors */
+	--color-primary: #0D2818;
+	--color-primary-foreground: #FFFFFF;
+	--color-secondary: #C4A052;
+	--color-secondary-foreground: #0D2818;
+	--color-destructive: #DC2626;
+	--color-destructive-foreground: #FFFFFF;
+	--color-muted: #F1F5F9;
+	--color-muted-foreground: #64748B;
+	--color-accent: #C4A052;
+	--color-accent-foreground: #0D2818;
+	--color-border: #E2E8F0;
+	--color-input: #E2E8F0;
+	--color-ring: #C4A052;
+
+	/* Glass Effect Colors */
+	--color-glass-white: #FFFFFF1A;
+	--color-glass-dark: #0D28181A;
+	--color-glass-border: #FFFFFF26;
+
+	/* Typography */
+	--font-display: 'Playfair Display', Georgia, serif;
+	--font-sans: 'DM Sans', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', monospace;
+
+	/* Radius */
+	--radius-sm: 0.5rem;
+	--radius-md: 0.75rem;
+	--radius-lg: 1rem;
+	--radius-xl: 1.5rem;
+	--radius-2xl: 2rem;
+
+	/* Shadows */
+	--shadow-glass: 0 8px 32px #0D281826;
+	--shadow-gold: 0 4px 24px #C4A05240;
+	--shadow-elevation: 0 25px 50px -12px #0D281840;
+}

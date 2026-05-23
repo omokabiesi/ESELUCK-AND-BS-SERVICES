@@ -1,0 +1,37 @@
+{
+  "summary": "Build Admin & Distributor Dashboard System",
+  "todos": [
+    {
+      "id": 1,
+      "description": "Create auth context, hooks, and login/register pages",
+      "files": [],
+      "status": "complete"
+    },
+    {
+      "id": 2,
+      "description": "Build Admin Dashboard with messages, quotes, distributors views",
+      "files": [],
+      "status": "complete"
+    },
+    {
+      "id": 3,
+      "description": "Build Distributor Dashboard with profile and order system",
+      "files": [],
+      "status": "complete"
+    },
+    {
+      "id": 4,
+      "description": "Update Contact form, create Quote modal, add Register button",
+      "files": [],
+      "status": "complete"
+    },
+    {
+      "id": 5,
+      "description": "Add routes and navigation updates",
+      "files": [],
+      "status": "complete"
+    }
+  ],
+  "createdAt": "2026-05-22T19:25:26.027Z",
+  "updatedAt": "2026-05-22T19:33:13.351Z"
+}
