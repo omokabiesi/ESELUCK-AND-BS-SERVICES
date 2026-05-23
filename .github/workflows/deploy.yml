@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  # ── Job 1: Sync Supabase migrations ───────────────────────────────────────
+  # ── Job 1: Supabase DB Migrations ─────────────────────────────────────────
   migrate-supabase:
     name: Supabase DB Migrations
     runs-on: ubuntu-latest
@@ -20,7 +20,7 @@ jobs:
           version: latest
 
       - name: Link Supabase project
-        run: supabase link --project-ref vegbpvoxsxxwykegmtbz
+        run: supabase link --project-ref pkpekaszjxspqgrumbuk
         env:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
 
@@ -30,7 +30,31 @@ jobs:
           SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
           SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
 
-  # ── Job 2: Build & deploy to Hostinger (runs after migrations succeed) ────
+  # ── Job 2: Deploy Supabase Edge Functions ─────────────────────────────────
+  deploy-edge-functions:
+    name: Deploy Edge Functions
+    runs-on: ubuntu-latest
+    needs: migrate-supabase
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Link Supabase project
+        run: supabase link --project-ref pkpekaszjxspqgrumbuk
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+      - name: Deploy all Edge Functions
+        run: supabase functions deploy --no-verify-jwt
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+
+  # ── Job 3: Build & Deploy to Hostinger via FTP ────────────────────────────
   deploy-hostinger:
     name: Build & Deploy to Hostinger
     runs-on: ubuntu-latest
