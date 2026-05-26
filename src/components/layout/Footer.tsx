@@ -62,28 +62,28 @@ export default function Footer() {
             </p>
             <div data-ev-id="ev_f58b4e8cbe" className="flex flex-col gap-4">
               <a data-ev-id="ev_02086bdab4"
-              href="tel:+2348012345678"
+              href="tel:+2348028325634"
               className="flex items-center gap-3 text-white/70 hover:text-gold transition-colors group">
 
                 <div data-ev-id="ev_40a7adf499" className="w-10 h-10 rounded-lg bg-forest flex items-center justify-center group-hover:bg-gold/10 transition-colors">
                   <Phone size={18} className="text-gold" />
                 </div>
-                <span data-ev-id="ev_7de4f4776a">+234 801 234 5678</span>
+                <span data-ev-id="ev_7de4f4776a">+234 802 832 5634</span>
               </a>
               <a data-ev-id="ev_53d0e97d8c"
-              href="mailto:info@eseluck.com"
+              href="mailto:info@eselucknbs.com"
               className="flex items-center gap-3 text-white/70 hover:text-gold transition-colors group">
 
                 <div data-ev-id="ev_ed1467dcb0" className="w-10 h-10 rounded-lg bg-forest flex items-center justify-center group-hover:bg-gold/10 transition-colors">
                   <Mail size={18} className="text-gold" />
                 </div>
-                <span data-ev-id="ev_685ac1d604">info@eseluck.com</span>
+                <span data-ev-id="ev_685ac1d604">info@eselucknbs.com</span>
               </a>
               <div data-ev-id="ev_c1c63995f1" className="flex items-start gap-3 text-white/70">
                 <div data-ev-id="ev_101dbd4331" className="w-10 h-10 rounded-lg bg-forest flex items-center justify-center shrink-0">
                   <MapPin size={18} className="text-gold" />
                 </div>
-                <span data-ev-id="ev_3ea778cb30">123 Industrial Avenue, Victoria Island, Lagos, Nigeria</span>
+                <span data-ev-id="ev_3ea778cb30">Shop 06d Sabo Market, First Gate, Ikorodu, Lagos</span>
               </div>
             </div>
           </div>

@@ -11,19 +11,19 @@ const contactInfo = [
 {
   icon: Phone,
   title: 'Phone',
-  details: ['+234 801 234 5678', '+234 802 345 6789'],
-  action: 'tel:+2348012345678'
+  details: ['+234 802 832 5634'],
+  action: 'tel:+2348028325634'
 },
 {
   icon: Mail,
   title: 'Email',
-  details: ['info@eseluck.com', 'sales@eseluck.com'],
-  action: 'mailto:info@eseluck.com'
+  details: ['info@eselucknbs.com'],
+  action: 'mailto:info@eselucknbs.com'
 },
 {
   icon: MapPin,
   title: 'Address',
-  details: ['123 Industrial Avenue', 'Victoria Island, Lagos, Nigeria'],
+  details: ['Shop 06d Sabo Market, First Gate', 'Ikorodu, Lagos'],
   action: 'https://maps.google.com'
 },
 {
@@ -336,8 +336,8 @@ export default function Contact() {
                       Visit Our Office
                     </h3>
                     <p data-ev-id="ev_196082ee55" className="text-white/60">
-                      123 Industrial Avenue<br data-ev-id="ev_9374aa59e2" />
-                      Victoria Island, Lagos
+                      Shop 06d Sabo Market, First Gate<br data-ev-id="ev_9374aa59e2" />
+                      Ikorodu, Lagos
                     </p>
                   </div>
                 </div>
@@ -358,7 +358,7 @@ export default function Contact() {
                 </h3>
                 <div data-ev-id="ev_279cdc2cde" className="flex flex-col gap-4">
                   <a data-ev-id="ev_2002ba6a7a"
-                  href="tel:+2348012345678"
+                  href="tel:+2348028325634"
                   className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-gold/30 transition-colors group">
 
                     <div data-ev-id="ev_60994a2dbd" className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
@@ -370,7 +370,7 @@ export default function Contact() {
                     </div>
                   </a>
                   <a data-ev-id="ev_3cefa1d04b"
-                  href="https://wa.me/2348012345678"
+                  href="https://wa.me/2348028325634"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-green-500/30 transition-colors group">
@@ -384,7 +384,7 @@ export default function Contact() {
                     </div>
                   </a>
                   <a data-ev-id="ev_c66453d9a1"
-                  href="mailto:info@eseluck.com"
+                  href="mailto:info@eselucknbs.com"
                   className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 hover:border-gold/30 transition-colors group">
 
                     <div data-ev-id="ev_21ab315db6" className="w-12 h-12 rounded-lg bg-gold/10 flex items-center justify-center group-hover:bg-gold/20 transition-colors">
@@ -392,7 +392,7 @@ export default function Contact() {
                     </div>
                     <div data-ev-id="ev_993d18fff9">
                       <p data-ev-id="ev_3c7a383d4d" className="text-white font-medium">Email Us</p>
-                      <p data-ev-id="ev_28e94dea54" className="text-white/60 text-sm">info@eseluck.com</p>
+                      <p data-ev-id="ev_28e94dea54" className="text-white/60 text-sm">info@eselucknbs.com</p>
                     </div>
                   </a>
                 </div>

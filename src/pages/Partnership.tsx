@@ -371,14 +371,14 @@ export default function Partnership() {
             </div>
             <div data-ev-id="ev_391c1393ae" className="flex items-center gap-4">
               <a data-ev-id="ev_a73a955fe9"
-              href="tel:+2348012345678"
+              href="tel:+2348028325634"
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-forest/10 text-forest hover:bg-forest/20 transition-colors">
 
                 <Phone size={18} />
                 <span data-ev-id="ev_6f461e229b" className="font-medium">Call Us</span>
               </a>
               <a data-ev-id="ev_3c3fc5af78"
-              href="mailto:partners@eseluck.com"
+              href="mailto:info@eselucknbs.com"
               className="flex items-center gap-2 px-4 py-2 rounded-lg bg-gold text-forest hover:bg-gold-light transition-colors">
 
                 <Mail size={18} />

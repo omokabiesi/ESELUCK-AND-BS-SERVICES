@@ -70,13 +70,13 @@ export default function CTASection() {
             {
               icon: Phone,
               title: 'Call Us',
-              value: '+234 801 234 5678',
+              value: '+234 802 832 5634',
               description: 'Speak with our sales team'
             },
             {
               icon: Mail,
               title: 'Email Us',
-              value: 'sales@eseluck.com',
+              value: 'info@eselucknbs.com',
               description: 'Get a response within 24 hours'
             },
             {

@@ -4,7 +4,7 @@ import { MessageCircle, X } from 'lucide-react';
 
 export default function WhatsAppButton() {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
-  const whatsappNumber = '+2348012345678';
+  const whatsappNumber = '+2348028325634';
   const message = encodeURIComponent(
     'Hello ESELUCK & BS Nigeria Limited, I would like to inquire about your products and services.'
   );
